@@ -81,16 +81,11 @@
         android:layout_marginLeft="34dp"
         android:layout_marginStart="34dp" />
 
-    <Button
-        android:text="Virtual Horizon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/virtual_horizon"
-        android:onClick="onClick_VirtualHorizon"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp" />
+    <com.example.manhattan.AttitudeIndicator
+        android:id="@+id/attitude_indicator"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"/>
+
 
 </LinearLayout>

@@ -31,7 +31,7 @@ import static android.os.Build.VERSION_CODES.M;
 
 import com.example.manhattan.R;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements Orientation.Listener {
     private LocationManager locationManager;
     private LocationListener locationListener;
     private SensorManager sensorManager;
@@ -100,6 +100,9 @@ public class MainActivity extends Activity {
 
     private final Handler handler = new Handler();
 
+    private Orientation mOrientation;
+    private AttitudeIndicator mAttitudeIndicator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,6 +153,26 @@ public class MainActivity extends Activity {
         correctedXVals = new ArrayList<>();
         correctedYVals = new ArrayList<>();
 
+        mOrientation = new Orientation(this);
+        mAttitudeIndicator = (AttitudeIndicator) findViewById(R.id.attitude_indicator);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mOrientation.startListening(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mOrientation.stopListening();
+    }
+
+    @Override
+    public void onOrientationChanged(float pitch, float roll) {
+        mAttitudeIndicator.setAttitude(pitch, roll);
     }
 
     public void onClick_StartTracking(View view) {
