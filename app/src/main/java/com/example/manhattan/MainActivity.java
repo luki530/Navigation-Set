@@ -87,6 +87,8 @@ public class MainActivity extends Activity implements Orientation.Listener {
     private float[] geomagnet;
     private double[] acceleration;
 
+    private boolean text_visible = false;
+
     /* Kalman filter to correct GPS readings with acceleration */
     private KalmanFilter KF;
 
@@ -233,6 +235,24 @@ public class MainActivity extends Activity implements Orientation.Listener {
         double latCircumference = 40075160 * Math.cos(yOrigin);
         x = deltaLng * latCircumference / 2 / Math.PI;
         y = deltaLat * 40008000 / 2 / Math.PI;
+    }
+
+    public void onClick_ShowCorrected(View view) {
+        if (text_visible) {
+            this.TextView_corrected_x.setVisibility(View.INVISIBLE);
+            this.TextView_corrected_y.setVisibility(View.INVISIBLE);
+            this.TextView_diff_x.setVisibility(View.INVISIBLE);
+            this.TextView_diff_y.setVisibility(View.INVISIBLE);
+            text_visible = false;
+        }
+        else {
+            this.TextView_corrected_x.setVisibility(View.VISIBLE);
+            this.TextView_corrected_y.setVisibility(View.VISIBLE);
+            this.TextView_diff_x.setVisibility(View.VISIBLE);
+            this.TextView_diff_y.setVisibility(View.VISIBLE);
+            text_visible = true;
+        }
+
     }
 
     private class MyLocationListener implements LocationListener {
